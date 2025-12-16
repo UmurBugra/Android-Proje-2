@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ana Tema - CLearn için styles.xml'de tanımlı -->
+    <style name="Theme.EEE339androidproje" parent="Theme.CLearn" />
+</resources>

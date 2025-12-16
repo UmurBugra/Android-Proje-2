@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">C-learn</string>
+    
+    <!-- Giriş Ekranı -->
+    <string name="login_title">C-learn</string>
+    <string name="login_subtitle">Tıp Öğrenci Portalı</string>
+    <string name="hint_username">Kullanıcı Adı</string>
+    <string name="hint_password">Şifre</string>
+    <string name="btn_login">Giriş Yap</string>
+    <string name="error_empty_fields">Lütfen tüm alanları doldurun</string>
+    <string name="error_invalid_credentials">Geçersiz kullanıcı adı veya şifre</string>
+    
+    <!-- Dashboard -->
+    <string name="student_dashboard_title">Sınıflarım</string>
+    <string name="teacher_dashboard_title">Öğretmen Paneli</string>
+    <string name="no_classrooms">Henüz sınıf bulunmuyor</string>
+    <string name="classroom_students">%d öğrenci</string>
+    <string name="classroom_cases">%d vaka</string>
+    
+    <!-- Vaka Simülasyonu -->
+    <string name="patient_info_title">Hasta Bilgileri</string>
+    <string name="vital_signs_title">Vital Bulgular</string>
+    <string name="action_panel_title">İşlemler</string>
+    <string name="simulation_log_title">İşlem Geçmişi</string>
+    
+    <!-- İşlem Butonları -->
+    <string name="action_request_test">Tahlil İste</string>
+    <string name="action_examine">Muayene Et</string>
+    <string name="action_diagnose">Tanı Koy</string>
+    <string name="action_prescribe">Reçete Yaz</string>
+    
+    <!-- Vital Bulgular -->
+    <string name="vital_temperature">Ateş</string>
+    <string name="vital_pulse">Nabız</string>
+    <string name="vital_blood_pressure">Tansiyon</string>
+    <string name="vital_respiratory">Solunum</string>
+    
+    <!-- Genel -->
+    <string name="btn_logout">Çıkış</string>
+    <string name="btn_save">Kaydet</string>
+    <string name="btn_cancel">İptal</string>
+    <string name="loading">Yükleniyor...</string>
+</resources>

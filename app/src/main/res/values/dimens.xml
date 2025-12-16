@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dieter Rams Stili - Minimalist Boyutlar -->
+    
+    <!-- Köşe Yarıçapları -->
+    <dimen name="corner_radius_small">2dp</dimen>
+    <dimen name="corner_radius_medium">4dp</dimen>
+    
+    <!-- Boşluklar (Spacing) -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+    
+    <!-- Metin Boyutları -->
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_subtitle">18sp</dimen>
+    <dimen name="text_size_body">16sp</dimen>
+    <dimen name="text_size_caption">14sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    
+    <!-- Buton Boyutları -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_min_width">120dp</dimen>
+    
+    <!-- Input Alanları -->
+    <dimen name="input_height">56dp</dimen>
+    
+    <!-- Ayırıcı (Divider) -->
+    <dimen name="divider_height">1dp</dimen>
+    
+    <!-- Liste Öğesi -->
+    <dimen name="list_item_min_height">64dp</dimen>
+</resources>

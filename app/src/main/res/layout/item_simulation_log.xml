@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/spacing_s"
+    android:paddingBottom="@dimen/spacing_s">
+
+    <!-- Zaman -->
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextStyle.Caption"
+        android:textSize="@dimen/text_size_small"
+        android:text="12:34" />
+
+    <!-- İşlem Adı -->
+    <TextView
+        android:id="@+id/tvActionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyle.ListTitle"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Tahlil İste" />
+
+    <!-- Geri Bildirim -->
+    <TextView
+        android:id="@+id/tvFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/TextStyle.ListSubtitle"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:text="Kan tahlili sonuçları bekleniyor..." />
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dieter Rams Renk Paleti -->
+    
+    <!-- Arka Plan Renkleri -->
+    <color name="background_primary">#F4F4F4</color>
+    <color name="background_secondary">#FFFFFF</color>
+    <color name="background_input">#FAFAFA</color>
+    
+    <!-- Metin Renkleri -->
+    <color name="text_primary">#222222</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#999999</color>
+    <color name="text_on_accent">#FFFFFF</color>
+    
+    <!-- Aksan Rengi (Braun/Rams Turuncusu) -->
+    <color name="accent">#FF4400</color>
+    <color name="accent_pressed">#E03D00</color>
+    
+    <!-- Ayırıcı ve Kenarlık -->
+    <color name="divider">#E0E0E0</color>
+    <color name="border">#DDDDDD</color>
+    
+    <!-- Durum Renkleri -->
+    <color name="success">#2E7D32</color>
+    <color name="error">#C62828</color>
+    <color name="warning">#F57C00</color>
+</resources>

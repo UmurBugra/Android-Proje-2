@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary">
+
+    <!-- ========== ÜST ALAN: HASTA BİLGİLERİ ========== -->
+    <ScrollView
+        android:id="@+id/scrollPatientInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/background_secondary"
+        app:layout_constraintBottom_toTopOf="@id/divider1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.35">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_m">
+
+            <!-- Vaka Başlığı -->
+            <TextView
+                android:id="@+id/tvCaseTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle.Subtitle"
+                android:layout_marginBottom="@dimen/spacing_m"
+                tools:text="Akut Karın Ağrısı" />
+
+            <!-- Hasta Bilgileri -->
+            <TextView
+                android:id="@+id/tvPatientInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle.Body"
+                android:layout_marginBottom="@dimen/spacing_l"
+                tools:text="45 yaşında erkek hasta. 2 gündür devam eden karın ağrısı..." />
+
+            <!-- Vital Bulgular Başlığı -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vital_signs_title"
+                style="@style/TextStyle.ListTitle"
+                android:layout_marginBottom="@dimen/spacing_s" />
+
+            <!-- Vital Bulgular Grid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Sol Sütun -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vital_temperature"
+                        style="@style/TextStyle.Caption" />
+
+                    <TextView
+                        android:id="@+id/tvTemperature"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle.ListTitle"
+                        android:layout_marginBottom="@dimen/spacing_m"
+                        tools:text="38.2°C" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vital_blood_pressure"
+                        style="@style/TextStyle.Caption" />
+
+                    <TextView
+                        android:id="@+id/tvBloodPressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle.ListTitle"
+                        tools:text="130/85 mmHg" />
+                </LinearLayout>
+
+                <!-- Sağ Sütun -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vital_pulse"
+                        style="@style/TextStyle.Caption" />
+
+                    <TextView
+                        android:id="@+id/tvPulse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle.ListTitle"
+                        android:layout_marginBottom="@dimen/spacing_m"
+                        tools:text="92/dk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vital_respiratory"
+                        style="@style/TextStyle.Caption" />
+
+                    <TextView
+                        android:id="@+id/tvRespiratory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextStyle.ListTitle"
+                        tools:text="18/dk" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Ayırıcı 1 -->
+    <View
+        android:id="@+id/divider1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollPatientInfo" />
+
+    <!-- ========== ORTA ALAN: KONTROL PANELİ ========== -->
+    <LinearLayout
+        android:id="@+id/actionPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_m"
+        android:background="@color/background_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/action_panel_title"
+            style="@style/TextStyle.ListTitle"
+            android:layout_marginBottom="@dimen/spacing_s" />
+
+        <!-- Üst Sıra Butonlar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_s">
+
+            <Button
+                android:id="@+id/btnRequestTest"
+                style="@style/Button.Action"
+                android:text="@string/action_request_test"
+                android:layout_marginEnd="@dimen/spacing_s" />
+
+            <Button
+                android:id="@+id/btnExamine"
+                style="@style/Button.Action"
+                android:text="@string/action_examine" />
+        </LinearLayout>
+
+        <!-- Alt Sıra Butonlar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnDiagnose"
+                style="@style/Button.Action"
+                android:text="@string/action_diagnose"
+                android:layout_marginEnd="@dimen/spacing_s" />
+
+            <Button
+                android:id="@+id/btnPrescribe"
+                style="@style/Button.Action"
+                android:text="@string/action_prescribe" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Ayırıcı 2 -->
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/actionPanel" />
+
+    <!-- ========== ALT ALAN: LOG AKIŞI ========== -->
+    <TextView
+        android:id="@+id/tvLogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/simulation_log_title"
+        style="@style/TextStyle.ListTitle"
+        android:padding="@dimen/spacing_m"
+        android:paddingBottom="@dimen/spacing_s"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLogs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/spacing_m"
+        android:paddingEnd="@dimen/spacing_m"
+        android:paddingBottom="@dimen/spacing_s"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogTitle"
+        tools:listitem="@layout/item_simulation_log" />
+
+    <!-- Boş Log Mesajı -->
+    <TextView
+        android:id="@+id/tvEmptyLogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Henüz işlem yapılmadı"
+        style="@style/TextStyle.Caption"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogTitle" />
+
+    <!-- Geri Butonu -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@android:drawable/ic_menu_revert"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Geri"
+        android:layout_margin="@dimen/spacing_m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
