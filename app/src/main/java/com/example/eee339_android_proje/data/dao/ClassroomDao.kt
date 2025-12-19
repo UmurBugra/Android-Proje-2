@@ -27,4 +27,10 @@ interface ClassroomDao {
     
     @Query("SELECT * FROM classrooms WHERE id = :classroomId")
     fun getClassroomByIdLive(classroomId: Long): LiveData<Classroom?>
+
+    @Query("SELECT * FROM classrooms WHERE joinCode = :joinCode LIMIT 1")
+    suspend fun getClassroomByJoinCode(joinCode: String): Classroom?
+
+    @Query("DELETE FROM classrooms WHERE id = :classroomId")
+    suspend fun deleteClassroom(classroomId: Long)
 }

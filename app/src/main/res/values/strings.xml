@@ -7,9 +7,24 @@
     <string name="hint_username">Kullanıcı Adı</string>
     <string name="hint_password">Şifre</string>
     <string name="btn_login">Giriş Yap</string>
+    <string name="btn_register">Kayıt Ol</string>
     <string name="error_empty_fields">Lütfen tüm alanları doldurun</string>
     <string name="error_invalid_credentials">Geçersiz kullanıcı adı veya şifre</string>
-    
+    <string name="demo_accounts">Demo Hesaplar:\nÖğretmen: ogretmen / 123456\nÖğrenci: ogrenci / 123456</string>
+
+    <!-- Kayıt Ekranı -->
+    <string name="register_title">Kayıt Ol</string>
+    <string name="register_subtitle">Yeni Hesap Oluştur</string>
+    <string name="hint_confirm_password">Şifre Tekrar</string>
+    <string name="hint_role">Rol Seçin</string>
+    <string name="role_student">Öğrenci</string>
+    <string name="role_teacher">Öğretmen</string>
+    <string name="error_passwords_not_match">Şifreler eşleşmiyor</string>
+    <string name="error_username_exists">Bu kullanıcı adı zaten kullanılıyor</string>
+    <string name="error_password_too_short">Şifre en az 6 karakter olmalıdır</string>
+    <string name="register_success">Kayıt başarılı! Giriş yapabilirsiniz</string>
+    <string name="have_account">Zaten hesabınız var mı?</string>
+
     <!-- Dashboard -->
     <string name="student_dashboard_title">Sınıflarım</string>
     <string name="teacher_dashboard_title">Öğretmen Paneli</string>
@@ -17,6 +32,39 @@
     <string name="classroom_students">%d öğrenci</string>
     <string name="classroom_cases">%d vaka</string>
     
+    <!-- Sınıf Oluşturma -->
+    <string name="create_classroom_title">Yeni Sınıf Oluştur</string>
+    <string name="hint_classroom_name">Sınıf Adı</string>
+    <string name="hint_classroom_description">Açıklama (İsteğe Bağlı)</string>
+    <string name="hint_join_code">Katılım Kodu (örn: IC101)</string>
+    <string name="btn_create_classroom">Sınıf Oluştur</string>
+    <string name="classroom_created_success">Sınıf başarıyla oluşturuldu!</string>
+    <string name="error_classroom_name_empty">Lütfen sınıf adı girin</string>
+    <string name="error_join_code_empty">Lütfen katılım kodu girin</string>
+    <string name="error_join_code_exists">Bu katılım kodu zaten kullanılıyor</string>
+
+    <!-- Sınıfa Katılma -->
+    <string name="join_classroom_title">Sınıfa Katıl</string>
+    <string name="join_classroom_hint">Öğretmeninizden aldığınız katılım kodunu girin</string>
+    <string name="btn_join_classroom">Katıl</string>
+    <string name="classroom_joined_success">Sınıfa başarıyla katıldınız!</string>
+    <string name="error_classroom_not_found">Geçersiz katılım kodu</string>
+    <string name="error_already_enrolled">Bu sınıfa zaten kayıtlısınız</string>
+    <string name="join_code_label">Katılım Kodu:</string>
+
+    <!-- Duyuru -->
+    <string name="announcement_title">Duyuru Yap</string>
+    <string name="hint_announcement_title">Duyuru Başlığı</string>
+    <string name="hint_announcement_message">Duyuru Mesajı</string>
+    <string name="hint_select_classroom">Sınıf Seçin</string>
+    <string name="btn_post_announcement">Duyuru Yap</string>
+    <string name="announcement_posted_success">Duyuru başarıyla paylaşıldı!</string>
+    <string name="error_select_classroom">Lütfen bir sınıf seçin</string>
+    <string name="error_announcement_title_empty">Lütfen duyuru başlığı girin</string>
+    <string name="error_announcement_message_empty">Lütfen duyuru mesajı girin</string>
+    <string name="no_announcements">Henüz duyuru yok</string>
+    <string name="recent_announcements">Son Duyurular</string>
+
     <!-- Vaka Simülasyonu -->
     <string name="patient_info_title">Hasta Bilgileri</string>
     <string name="vital_signs_title">Vital Bulgular</string>
@@ -35,6 +83,32 @@
     <string name="vital_blood_pressure">Tansiyon</string>
     <string name="vital_respiratory">Solunum</string>
     
+    <!-- Tanı Koyma ve Değerlendirme -->
+    <string name="submit_diagnosis_title">Tanı Koy</string>
+    <string name="hint_diagnosis">Tanınız</string>
+    <string name="hint_diagnosis_explanation">Tanı açıklaması ve nedenleri</string>
+    <string name="btn_submit_diagnosis">Tanıyı Gönder</string>
+    <string name="diagnosis_submitted_success">Tanınız başarıyla gönderildi!</string>
+    <string name="error_diagnosis_empty">Lütfen tanı girin</string>
+    <string name="error_explanation_empty">Lütfen tanı açıklaması girin</string>
+    <string name="correct_diagnosis_label">Doğru Tanı:</string>
+    <string name="your_diagnosis_label">Sizin Tanınız:</string>
+    <string name="diagnosis_explanation_label">Açıklama:</string>
+    <string name="score_label">Puan:</string>
+    <string name="teacher_feedback_label">Öğretmen Geri Bildirimi:</string>
+    <string name="not_graded_yet">Henüz puanlanmadı</string>
+    <string name="grade_diagnosis_title">Tanıyı Puanla</string>
+    <string name="hint_score">Puan (0-100)</string>
+    <string name="hint_teacher_feedback">Geri bildirim (opsiyonel)</string>
+    <string name="btn_mark_correct">Doğru İşaretle</string>
+    <string name="btn_mark_incorrect">Yanlış İşaretle</string>
+    <string name="btn_save_grade">Puanı Kaydet</string>
+    <string name="diagnosis_graded_success">Tanı başarıyla puanlandı!</string>
+    <string name="student_diagnoses_title">Öğrenci Tanıları</string>
+    <string name="ungraded_diagnoses_title">Puanlanmamış Tanılar</string>
+    <string name="no_diagnoses">Henüz tanı yok</string>
+    <string name="view_diagnoses">Tanıları Görüntüle</string>
+
     <!-- Genel -->
     <string name="btn_logout">Çıkış</string>
     <string name="btn_save">Kaydet</string>

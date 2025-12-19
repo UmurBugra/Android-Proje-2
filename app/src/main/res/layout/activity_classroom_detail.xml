@@ -36,6 +36,15 @@
             android:layout_weight="1"
             style="@style/TextStyle.Subtitle"
             tools:text="Sınıf Adı" />
+
+        <Button
+            android:id="@+id/btnViewDiagnoses"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/view_diagnoses"
+            android:textSize="12sp"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.Button.TextButton" />
     </LinearLayout>
 
     <!-- Ayırıcı Çizgi -->
@@ -48,6 +57,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar" />
 
+    <!-- Duyurular Bölümü -->
+    <LinearLayout
+        android:id="@+id/announcementSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_m"
+        android:background="@color/background_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerTop">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_announcements"
+            style="@style/TextStyle.ListTitle"
+            android:layout_marginBottom="@dimen/spacing_xs" />
+
+        <TextView
+            android:id="@+id/tvAnnouncements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_announcements"
+            style="@style/TextStyle.Caption"
+            android:maxLines="5"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <!-- Ayırıcı Çizgi 2 -->
+    <View
+        android:id="@+id/dividerMiddle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/announcementSection" />
+
+    <!-- Vaka Listesi Başlığı -->
+    <TextView
+        android:id="@+id/tvCasesTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Vakalar"
+        style="@style/TextStyle.Subtitle"
+        android:padding="@dimen/spacing_m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dividerMiddle" />
+
     <!-- Vaka Listesi -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCases"
@@ -59,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dividerTop"
+        app:layout_constraintTop_toBottomOf="@id/tvCasesTitle"
         tools:listitem="@layout/item_case" />
 
     <!-- Boş Liste Mesajı -->

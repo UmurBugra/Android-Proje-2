@@ -15,7 +15,8 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
     
     private val caseScenarioDao = AppDatabase.getDatabase(application).caseScenarioDao()
     private val simulationLogDao = AppDatabase.getDatabase(application).simulationLogDao()
-    
+    private val studentDiagnosisDao = AppDatabase.getDatabase(application).studentDiagnosisDao()
+
     private var _case: LiveData<CaseScenario?>? = null
     val caseScenario: LiveData<CaseScenario?>
         get() = _case ?: MutableLiveData(null)
@@ -27,6 +28,9 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
     private val _vitalSigns = MutableLiveData<VitalSigns>()
     val vitalSigns: LiveData<VitalSigns> = _vitalSigns
     
+    private val _diagnosisSubmitState = MutableLiveData<DiagnosisSubmitState>()
+    val diagnosisSubmitState: LiveData<DiagnosisSubmitState> = _diagnosisSubmitState
+
     private var caseId: Long = 0
     private var studentId: Long = 0
     
@@ -88,10 +92,39 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
         }
     }
     
+    fun submitDiagnosis(caseId: Long, studentId: Long, diagnosis: String, explanation: String) {
+        viewModelScope.launch {
+            try {
+                val studentDiagnosis = com.example.eee339_android_proje.data.entity.StudentDiagnosis(
+                    caseId = caseId,
+                    studentId = studentId,
+                    diagnosis = diagnosis,
+                    explanation = explanation
+                )
+
+                val diagnosisId = studentDiagnosisDao.insert(studentDiagnosis)
+                if (diagnosisId > 0) {
+                    // Log kaydı da oluştur
+                    performAction("Tanı Koy: $diagnosis")
+                    _diagnosisSubmitState.postValue(DiagnosisSubmitState.Success("Tanınız başarıyla gönderildi!"))
+                } else {
+                    _diagnosisSubmitState.postValue(DiagnosisSubmitState.Error("Tanı gönderilirken hata oluştu"))
+                }
+            } catch (e: Exception) {
+                _diagnosisSubmitState.postValue(DiagnosisSubmitState.Error("Hata: ${e.message}"))
+            }
+        }
+    }
+
     data class VitalSigns(
         val temperature: String,
         val pulse: String,
         val bloodPressure: String,
         val respiratory: String
     )
+
+    sealed class DiagnosisSubmitState {
+        data class Success(val message: String) : DiagnosisSubmitState()
+        data class Error(val message: String) : DiagnosisSubmitState()
+    }
 }

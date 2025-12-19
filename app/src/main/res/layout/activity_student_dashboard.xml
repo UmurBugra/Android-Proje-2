@@ -54,54 +54,37 @@
             android:layout_marginTop="@dimen/spacing_xs" />
     </LinearLayout>
 
-    <!-- Duyurular Bölümü -->
+
+    <!-- Sınıf Başlığı ve Katıl Butonu -->
     <LinearLayout
-        android:id="@+id/announcementSection"
+        android:id="@+id/tvSectionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="@dimen/spacing_m"
-        android:background="@color/background_input"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar">
 
         <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sınıflarınız"
+            style="@style/TextStyle.Subtitle" />
+
+        <Button
+            android:id="@+id/btnJoinClass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📢 Son Duyurular"
-            style="@style/TextStyle.ListTitle"
-            android:layout_marginBottom="@dimen/spacing_xs" />
+            android:text="@string/btn_join_classroom"
+            android:textSize="14sp"
+            android:paddingStart="@dimen/spacing_m"
+            android:paddingEnd="@dimen/spacing_m"
+            style="@style/Button.Accent" />
 
-        <TextView
-            android:id="@+id/tvAnnouncement"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Henüz duyuru bulunmuyor."
-            style="@style/TextStyle.Caption" />
     </LinearLayout>
-
-    <!-- Ayırıcı Çizgi -->
-    <View
-        android:id="@+id/dividerTop"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/divider_height"
-        android:background="@color/divider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/announcementSection" />
-
-    <!-- Sınıf Başlığı -->
-    <TextView
-        android:id="@+id/tvSectionTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Sınıflarınız"
-        style="@style/TextStyle.Subtitle"
-        android:padding="@dimen/spacing_m"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dividerTop" />
 
     <!-- Sınıf Listesi -->
     <androidx.recyclerview.widget.RecyclerView

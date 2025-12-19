@@ -28,11 +28,28 @@
         android:layout_height="wrap_content"
         android:text="@string/login_subtitle"
         style="@style/TextStyle.Caption"
-        android:layout_marginBottom="@dimen/spacing_xxl"
-        app:layout_constraintBottom_toTopOf="@id/etUsername"
+        android:layout_marginBottom="@dimen/spacing_s"
+        app:layout_constraintBottom_toTopOf="@id/tvDemoAccounts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <!-- Demo Hesap Bilgileri -->
+    <TextView
+        android:id="@+id/tvDemoAccounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/demo_accounts"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:padding="@dimen/spacing_s"
+        android:background="#1A000000"
+        android:layout_marginBottom="@dimen/spacing_l"
+        app:layout_constraintBottom_toTopOf="@id/etUsername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
 
     <!-- Kullanıcı Adı Input -->
     <EditText
@@ -48,7 +65,7 @@
         app:layout_constraintBottom_toTopOf="@id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintTop_toBottomOf="@id/tvDemoAccounts"
         app:layout_constraintWidth_max="360dp" />
 
     <!-- Şifre Input -->
@@ -74,10 +91,26 @@
         android:layout_width="0dp"
         style="@style/Button.Accent"
         android:text="@string/btn_login"
-        app:layout_constraintBottom_toTopOf="@id/tvError"
+        android:layout_marginBottom="@dimen/spacing_m"
+        app:layout_constraintBottom_toTopOf="@id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintWidth_max="360dp" />
+
+    <!-- Kayıt Ol Butonu -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_register"
+        android:textColor="@color/accent"
+        android:background="@android:color/transparent"
+        android:textSize="@dimen/text_size_body"
+        app:layout_constraintBottom_toTopOf="@id/tvError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintWidth_max="360dp" />
 
     <!-- Hata Mesajı -->
@@ -92,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin" />
+        app:layout_constraintTop_toBottomOf="@id/btnRegister" />
 
     <!-- Yükleniyor Göstergesi -->
     <ProgressBar

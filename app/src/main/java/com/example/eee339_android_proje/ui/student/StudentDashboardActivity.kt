@@ -2,14 +2,18 @@ package com.example.eee339_android_proje.ui.student
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eee339_android_proje.databinding.ActivityStudentDashboardBinding
+import com.example.eee339_android_proje.databinding.DialogJoinClassroomBinding
 import com.example.eee339_android_proje.ui.adapter.ClassroomAdapter
 import com.example.eee339_android_proje.ui.classroom.ClassroomDetailActivity
 import com.example.eee339_android_proje.ui.login.LoginActivity
@@ -35,6 +39,7 @@ class StudentDashboardActivity : AppCompatActivity() {
         }
 
         userId = intent.getLongExtra(LoginActivity.EXTRA_USER_ID, 0)
+        viewModel.setStudentId(userId)
 
         setupRecyclerView()
         setupListeners()
@@ -59,6 +64,10 @@ class StudentDashboardActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+
+        binding.btnJoinClass.setOnClickListener {
+            showJoinClassroomDialog()
+        }
     }
 
     private fun observeViewModel() {
@@ -67,5 +76,37 @@ class StudentDashboardActivity : AppCompatActivity() {
             binding.tvEmpty.visibility = if (classrooms.isEmpty()) View.VISIBLE else View.GONE
             binding.rvClassrooms.visibility = if (classrooms.isEmpty()) View.GONE else View.VISIBLE
         }
+
+
+        viewModel.joinClassroomState.observe(this) { state ->
+            when (state) {
+                is StudentDashboardViewModel.JoinClassroomState.Success -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+                is StudentDashboardViewModel.JoinClassroomState.Error -> {
+                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showJoinClassroomDialog() {
+        val dialogBinding = DialogJoinClassroomBinding.inflate(LayoutInflater.from(this))
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogBinding.btnJoin.setOnClickListener {
+            val joinCode = dialogBinding.etJoinCode.text.toString().trim()
+            viewModel.joinClassroom(joinCode)
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

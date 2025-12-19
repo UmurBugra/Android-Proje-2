@@ -12,7 +12,8 @@ class ClassroomDetailViewModel(application: Application) : AndroidViewModel(appl
     
     private val classroomDao = AppDatabase.getDatabase(application).classroomDao()
     private val caseScenarioDao = AppDatabase.getDatabase(application).caseScenarioDao()
-    
+    private val announcementDao = AppDatabase.getDatabase(application).announcementDao()
+
     private val _classroomId = MutableLiveData<Long>()
     
     private var _classroom: LiveData<Classroom?>? = null
@@ -23,9 +24,14 @@ class ClassroomDetailViewModel(application: Application) : AndroidViewModel(appl
     val cases: LiveData<List<CaseScenario>>
         get() = _cases ?: MutableLiveData(emptyList())
     
+    private var _announcements: LiveData<List<com.example.eee339_android_proje.data.entity.Announcement>>? = null
+    val announcements: LiveData<List<com.example.eee339_android_proje.data.entity.Announcement>>
+        get() = _announcements ?: MutableLiveData(emptyList())
+
     fun setClassroomId(classroomId: Long) {
         _classroomId.value = classroomId
         _classroom = classroomDao.getClassroomByIdLive(classroomId)
         _cases = caseScenarioDao.getCasesByClassroom(classroomId)
+        _announcements = announcementDao.getAnnouncementsByClassroom(classroomId)
     }
 }

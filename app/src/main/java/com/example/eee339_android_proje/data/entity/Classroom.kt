@@ -25,5 +25,6 @@ data class Classroom(
     val id: Long = 0,
     val className: String,
     val description: String = "",
-    val teacherId: Long
+    val teacherId: Long,
+    val joinCode: String = "" // Öğrencilerin sınıfa katılması için kod
 )
