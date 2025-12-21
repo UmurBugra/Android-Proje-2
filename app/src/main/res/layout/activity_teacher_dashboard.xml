@@ -68,14 +68,28 @@
 
         <Button
             android:id="@+id/btnNewClass"
-            style="@style/Button.Action"
-            android:text="+ Yeni Sınıf"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="@string/btn_create_classroom"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/bg_button_secondary"
+            android:textSize="@dimen/text_size_caption"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null"
             android:layout_marginEnd="@dimen/spacing_s" />
 
         <Button
             android:id="@+id/btnNewAnnouncement"
-            style="@style/Button.Action"
-            android:text="+ Duyuru Yap" />
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_weight="1"
+            android:text="@string/btn_post_announcement"
+            android:textColor="@color/text_primary"
+            android:background="@drawable/bg_button_secondary"
+            android:textSize="@dimen/text_size_caption"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null" />
     </LinearLayout>
 
     <!-- Ayırıcı Çizgi -->

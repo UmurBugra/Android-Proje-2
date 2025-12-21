@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Dieter Rams Stili - Temel Tema -->
+    <!-- Dieter Rams Stili - "Less but Better" -->
+    
+    <!-- Temel Tema -->
     <style name="Theme.CLearn" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/accent</item>
         <item name="colorPrimaryVariant">@color/accent_pressed</item>
@@ -17,12 +19,13 @@
     <!-- Base TextStyle -->
     <style name="TextStyle" parent="android:Widget.TextView" />
 
-    <!-- Başlık Metni -->
+    <!-- Başlık Metni - Parlak ve Net -->
     <style name="TextStyle.Title" parent="TextStyle">
         <item name="android:textSize">@dimen/text_size_title</item>
         <item name="android:textColor">@color/text_primary</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
     <!-- Alt Başlık Metni -->

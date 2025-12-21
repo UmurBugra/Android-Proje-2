@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Dieter Rams Stili - Minimal Liste Öğesi -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -13,19 +14,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="@dimen/spacing_m"
-        android:paddingEnd="@dimen/spacing_m"
-        android:paddingTop="@dimen/spacing_m"
-        android:paddingBottom="@dimen/spacing_m"
-        android:minHeight="@dimen/list_item_min_height">
+        android:paddingStart="@dimen/spacing_l"
+        android:paddingEnd="@dimen/spacing_l"
+        android:paddingTop="@dimen/spacing_l"
+        android:paddingBottom="@dimen/spacing_l"
+        android:minHeight="80dp">
 
-        <!-- Sınıf Adı -->
-        <TextView
-            android:id="@+id/tvClassName"
+        <!-- Üst Satır: Sınıf Adı ve Katılım Kodu -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextStyle.ListTitle"
-            android:text="Sınıf Adı" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Sınıf Adı -->
+            <TextView
+                android:id="@+id/tvClassName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/TextStyle.ListTitle"
+                android:text="Sınıf Adı" />
+
+            <!-- Katılım Kodu Badge -->
+            <TextView
+                android:id="@+id/tvJoinCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_join_code_badge"
+                android:paddingStart="@dimen/spacing_s"
+                android:paddingEnd="@dimen/spacing_s"
+                android:paddingTop="@dimen/spacing_xs"
+                android:paddingBottom="@dimen/spacing_xs"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:visibility="gone"
+                android:text="IC101" />
+        </LinearLayout>
 
         <!-- Açıklama -->
         <TextView
@@ -33,7 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/TextStyle.ListSubtitle"
-            android:layout_marginTop="@dimen/spacing_xs"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:text="Açıklama" />
     </LinearLayout>
 
@@ -41,7 +69,10 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_height"
-        android:layout_marginStart="@dimen/spacing_m"
+        android:layout_marginStart="@dimen/spacing_l"
+        android:layout_marginEnd="@dimen/spacing_l"
         android:background="@color/divider" />
 
 </LinearLayout>
+
+

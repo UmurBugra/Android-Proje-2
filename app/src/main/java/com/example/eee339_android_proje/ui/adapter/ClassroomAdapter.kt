@@ -1,6 +1,7 @@
 package com.example.eee339_android_proje.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,6 +10,7 @@ import com.example.eee339_android_proje.data.entity.Classroom
 import com.example.eee339_android_proje.databinding.ItemClassroomBinding
 
 class ClassroomAdapter(
+    private val showJoinCode: Boolean = false,
     private val onItemClick: (Classroom) -> Unit
 ) : ListAdapter<Classroom, ClassroomAdapter.ClassroomViewHolder>(ClassroomDiffCallback()) {
 
@@ -31,7 +33,7 @@ class ClassroomAdapter(
 
         init {
             binding.root.setOnClickListener {
-                val position = adapterPosition
+                val position = bindingAdapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     onItemClick(getItem(position))
                 }
@@ -41,6 +43,14 @@ class ClassroomAdapter(
         fun bind(classroom: Classroom) {
             binding.tvClassName.text = classroom.className
             binding.tvDescription.text = classroom.description
+            
+            // Öğretmen için katılım kodunu göster
+            if (showJoinCode && classroom.joinCode.isNotEmpty()) {
+                binding.tvJoinCode.visibility = View.VISIBLE
+                binding.tvJoinCode.text = classroom.joinCode
+            } else {
+                binding.tvJoinCode.visibility = View.GONE
+            }
         }
     }
 
@@ -54,3 +64,4 @@ class ClassroomAdapter(
         }
     }
 }
+

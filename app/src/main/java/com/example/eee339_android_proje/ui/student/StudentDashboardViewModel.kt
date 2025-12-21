@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import com.example.eee339_android_proje.data.AppDatabase
 import com.example.eee339_android_proje.data.entity.Classroom
@@ -27,8 +28,17 @@ class StudentDashboardViewModel(application: Application) : AndroidViewModel(app
     private val _joinClassroomState = MutableLiveData<JoinClassroomState>()
     val joinClassroomState: LiveData<JoinClassroomState> = _joinClassroomState
 
+    // Observer referanslarını sakla - memory leak önleme
+    private var classroomsLiveData: LiveData<List<Classroom>>? = null
+    private var classroomsObserver: Observer<List<Classroom>>? = null
+    private var announcementsLiveData: LiveData<List<com.example.eee339_android_proje.data.entity.Announcement>>? = null
+    private var announcementsObserver: Observer<List<com.example.eee339_android_proje.data.entity.Announcement>>? = null
+
     fun setStudentId(studentId: Long) {
         _studentId.value = studentId
+
+        // Önceki observer'ları temizle
+        cleanupObservers()
 
         // Kayıtlı sınıfları yükle
         viewModelScope.launch {
@@ -37,21 +47,51 @@ class StudentDashboardViewModel(application: Application) : AndroidViewModel(app
                 kotlinx.coroutines.delay(500)
 
                 // Sınıfları getir
-                enrollmentDao.getEnrolledClassrooms(studentId).observeForever { enrolledClassrooms ->
+                classroomsLiveData = enrollmentDao.getEnrolledClassrooms(studentId)
+                classroomsObserver = Observer { enrolledClassrooms ->
                     _classrooms.postValue(enrolledClassrooms)
 
                     // Duyuruları yükle
                     if (enrolledClassrooms.isNotEmpty()) {
                         val classroomIds = enrolledClassrooms.map { it.id }
-                        announcementDao.getRecentAnnouncementsByClassrooms(classroomIds).observeForever { announcements ->
+                        
+                        // Önceki duyuru observer'ını temizle
+                        announcementsLiveData?.let { liveData ->
+                            announcementsObserver?.let { observer ->
+                                liveData.removeObserver(observer)
+                            }
+                        }
+                        
+                        announcementsLiveData = announcementDao.getRecentAnnouncementsByClassrooms(classroomIds)
+                        announcementsObserver = Observer { announcements ->
                             _recentAnnouncements.postValue(announcements)
                         }
+                        announcementsLiveData?.observeForever(announcementsObserver!!)
                     }
                 }
+                classroomsLiveData?.observeForever(classroomsObserver!!)
             } catch (e: Exception) {
                 _classrooms.postValue(emptyList())
             }
         }
+    }
+
+    private fun cleanupObservers() {
+        classroomsLiveData?.let { liveData ->
+            classroomsObserver?.let { observer ->
+                liveData.removeObserver(observer)
+            }
+        }
+        announcementsLiveData?.let { liveData ->
+            announcementsObserver?.let { observer ->
+                liveData.removeObserver(observer)
+            }
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        cleanupObservers()
     }
 
     fun joinClassroom(joinCode: String) {
@@ -104,3 +144,4 @@ class StudentDashboardViewModel(application: Application) : AndroidViewModel(app
         data class Error(val message: String) : JoinClassroomState()
     }
 }
+

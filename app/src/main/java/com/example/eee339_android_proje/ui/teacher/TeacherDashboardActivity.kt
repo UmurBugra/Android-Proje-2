@@ -49,7 +49,7 @@ class TeacherDashboardActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = ClassroomAdapter { classroom ->
+        adapter = ClassroomAdapter(showJoinCode = true) { classroom ->
             val intent = Intent(this, ClassroomDetailActivity::class.java)
             intent.putExtra(ClassroomDetailActivity.EXTRA_CLASSROOM_ID, classroom.id)
             intent.putExtra(LoginActivity.EXTRA_USER_ID, userId)
