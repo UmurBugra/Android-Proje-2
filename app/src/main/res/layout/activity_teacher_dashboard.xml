@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yönettiğiniz sınıflar ve hızlı erişim"
+            android:text="@string/teacher_dashboard_subtitle"
             style="@style/TextStyle.Caption"
             android:layout_marginTop="@dimen/spacing_xs" />
     </LinearLayout>
@@ -69,13 +69,13 @@
         <Button
             android:id="@+id/btnNewClass"
             style="@style/Button.Action"
-            android:text="+ Yeni Sınıf"
+            android:text="@string/btn_new_class"
             android:layout_marginEnd="@dimen/spacing_s" />
 
         <Button
             android:id="@+id/btnNewAnnouncement"
             style="@style/Button.Action"
-            android:text="+ Duyuru Yap" />
+            android:text="@string/btn_new_announcement" />
     </LinearLayout>
 
     <!-- Ayırıcı Çizgi -->
@@ -93,7 +93,7 @@
         android:id="@+id/tvSectionTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sınıflarınız"
+        android:text="@string/your_classrooms"
         style="@style/TextStyle.Subtitle"
         android:padding="@dimen/spacing_m"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +118,7 @@
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Henüz sınıf oluşturmadınız"
+        android:text="@string/no_classrooms_teacher"
         style="@style/TextStyle.Caption"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

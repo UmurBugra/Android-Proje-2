@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kayıtlı olduğunuz sınıflar"
+            android:text="@string/student_dashboard_subtitle"
             style="@style/TextStyle.Caption"
             android:layout_marginTop="@dimen/spacing_xs" />
     </LinearLayout>
@@ -71,7 +71,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sınıflarınız"
+            android:text="@string/your_classrooms"
             style="@style/TextStyle.Subtitle" />
 
         <Button

@@ -19,6 +19,7 @@ import com.example.eee339_android_proje.databinding.DialogGradeDiagnosisBinding
 import com.example.eee339_android_proje.ui.adapter.CaseAdapter
 import com.example.eee339_android_proje.ui.login.LoginActivity
 import com.example.eee339_android_proje.ui.simulation.CaseSimulationActivity
+import com.example.eee339_android_proje.R
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -110,47 +111,34 @@ class ClassroomDetailActivity : AppCompatActivity() {
     }
 
     private fun showDiagnosesDialog() {
-        lifecycleScope.launch {
-            val diagnosisDao = AppDatabase.getDatabase(applicationContext).studentDiagnosisDao()
-            val userDao = AppDatabase.getDatabase(applicationContext).userDao()
-            val caseDao = AppDatabase.getDatabase(applicationContext).caseScenarioDao()
+        val diagnosisDao = AppDatabase.getDatabase(applicationContext).studentDiagnosisDao()
+        val userDao = AppDatabase.getDatabase(applicationContext).userDao()
+        val caseDao = AppDatabase.getDatabase(applicationContext).caseScenarioDao()
 
-            diagnosisDao.getDiagnosesByClassroom(classroomId).observe(this@ClassroomDetailActivity) { diagnoses ->
-                if (diagnoses.isEmpty()) {
-                    Toast.makeText(this@ClassroomDetailActivity, "Henüz tanı yok", Toast.LENGTH_SHORT).show()
-                    return@observe
-                }
+        diagnosisDao.getDiagnosesByClassroom(classroomId).observe(this@ClassroomDetailActivity) { diagnoses ->
+            if (diagnoses.isEmpty()) {
+                Toast.makeText(this@ClassroomDetailActivity, getString(R.string.no_diagnoses), Toast.LENGTH_SHORT).show()
+                return@observe
+            }
 
-                val diagnosisItems = diagnoses.map { diagnosis ->
-                    lifecycleScope.launch {
-                        val student = userDao.getUserById(diagnosis.studentId)
-                        val case = caseDao.getCaseById(diagnosis.caseId)
-                        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                        val date = dateFormat.format(Date(diagnosis.submittedAt))
-                        val scoreText = if (diagnosis.score != null) "${diagnosis.score}/100" else "Puanlanmamış"
+            // Verileri asenkron olarak yükle ve UI'ı güncelle
+            lifecycleScope.launch {
+                val items = diagnoses.map { diagnosis ->
+                    val student = userDao.getUserById(diagnosis.studentId)
+                    val case = caseDao.getCaseById(diagnosis.caseId)
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("tr", "TR"))
+                    val date = dateFormat.format(Date(diagnosis.submittedAt))
+                    val scoreText = if (diagnosis.score != null) "${diagnosis.score}/100" else getString(R.string.not_graded_yet)
 
-                        "${student?.username ?: "?"} - ${case?.title ?: "?"}\n$date - $scoreText"
-                    }
-                }
-
-                val items = diagnoses.mapIndexed { index, diagnosis ->
-                    lifecycleScope.launch {
-                        val student = userDao.getUserById(diagnosis.studentId)
-                        val case = caseDao.getCaseById(diagnosis.caseId)
-                        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-                        val date = dateFormat.format(Date(diagnosis.submittedAt))
-                        val scoreText = if (diagnosis.score != null) "${diagnosis.score}/100" else "Puanlanmamış"
-
-                        "${student?.username ?: "?"} - ${case?.title ?: "?"}\n$date - $scoreText"
-                    }
-                }.map { it.toString() }.toTypedArray()
+                    "${student?.username ?: "?"} - ${case?.title ?: "?"}\n$date - $scoreText"
+                }.toTypedArray()
 
                 AlertDialog.Builder(this@ClassroomDetailActivity)
-                    .setTitle("Öğrenci Tanıları")
+                    .setTitle(getString(R.string.student_diagnoses_title))
                     .setItems(items) { _, which ->
                         showGradeDiagnosisDialog(diagnoses[which])
                     }
-                    .setNegativeButton("Kapat", null)
+                    .setNegativeButton(getString(R.string.btn_close), null)
                     .show()
             }
         }
@@ -199,13 +187,13 @@ class ClassroomDetailActivity : AppCompatActivity() {
                 val feedback = dialogBinding.etFeedback.text.toString()
 
                 if (scoreText.isEmpty()) {
-                    Toast.makeText(this@ClassroomDetailActivity, "Lütfen puan girin", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ClassroomDetailActivity, getString(R.string.error_score_empty), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
                 val score = scoreText.toIntOrNull()
                 if (score == null || score < 0 || score > 100) {
-                    Toast.makeText(this@ClassroomDetailActivity, "Puan 0-100 arasında olmalı", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ClassroomDetailActivity, getString(R.string.error_score_invalid), Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
@@ -220,7 +208,7 @@ class ClassroomDetailActivity : AppCompatActivity() {
                     )
                     diagnosisDao.update(updatedDiagnosis)
 
-                    Toast.makeText(this@ClassroomDetailActivity, "Tanı başarıyla puanlandı!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ClassroomDetailActivity, getString(R.string.diagnosis_graded_success), Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
             }

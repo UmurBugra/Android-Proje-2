@@ -19,6 +19,7 @@ import com.example.eee339_android_proje.databinding.DialogCreateClassroomBinding
 import com.example.eee339_android_proje.ui.adapter.ClassroomAdapter
 import com.example.eee339_android_proje.ui.classroom.ClassroomDetailActivity
 import com.example.eee339_android_proje.ui.login.LoginActivity
+import com.example.eee339_android_proje.R
 
 class TeacherDashboardActivity : AppCompatActivity() {
 
@@ -135,7 +136,7 @@ class TeacherDashboardActivity : AppCompatActivity() {
         // Sınıfları gözlemle ve spinner'a ekle
         viewModel.classrooms.observe(this) { classrooms ->
             if (classrooms.isEmpty()) {
-                Toast.makeText(this, "Önce bir sınıf oluşturmalısınız", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_create_classroom_first), Toast.LENGTH_SHORT).show()
                 return@observe
             }
 

@@ -15,6 +15,7 @@ import com.example.eee339_android_proje.databinding.ActivityCaseSimulationBindin
 import com.example.eee339_android_proje.databinding.DialogSubmitDiagnosisBinding
 import com.example.eee339_android_proje.ui.adapter.SimulationLogAdapter
 import com.example.eee339_android_proje.ui.login.LoginActivity
+import com.example.eee339_android_proje.R
 
 class CaseSimulationActivity : AppCompatActivity() {
 
@@ -66,11 +67,11 @@ class CaseSimulationActivity : AppCompatActivity() {
         }
 
         binding.btnRequestTest.setOnClickListener {
-            viewModel.performAction("Tahlil İste")
+            viewModel.performAction(getString(R.string.action_request_test))
         }
 
         binding.btnExamine.setOnClickListener {
-            viewModel.performAction("Muayene Et")
+            viewModel.performAction(getString(R.string.action_examine))
         }
 
         binding.btnDiagnose.setOnClickListener {
@@ -78,7 +79,7 @@ class CaseSimulationActivity : AppCompatActivity() {
         }
 
         binding.btnPrescribe.setOnClickListener {
-            viewModel.performAction("Reçete Yaz")
+            viewModel.performAction(getString(R.string.action_prescribe))
         }
     }
 
@@ -138,12 +139,12 @@ class CaseSimulationActivity : AppCompatActivity() {
             val explanation = dialogBinding.etExplanation.text.toString().trim()
 
             if (diagnosis.isEmpty()) {
-                Toast.makeText(this, "Lütfen tanı girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_diagnosis_empty), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (explanation.isEmpty()) {
-                Toast.makeText(this, "Lütfen tanı açıklaması girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.error_explanation_empty), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

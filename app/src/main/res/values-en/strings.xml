@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">C-learn</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">C-learn</string>
+    <string name="login_subtitle">Medical Student Portal</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="error_empty_fields">Please fill in all fields</string>
+    <string name="error_invalid_credentials">Invalid username or password</string>
+    <string name="demo_accounts">Demo Accounts:\nTeacher: ogretmen / 123456\nStudent: ogrenci / 123456</string>
+
+    <!-- Registration Screen -->
+    <string name="register_title">Register</string>
+    <string name="register_subtitle">Create New Account</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_role">Select Role</string>
+    <string name="role_student">Student</string>
+    <string name="role_teacher">Teacher</string>
+    <string name="error_passwords_not_match">Passwords do not match</string>
+    <string name="error_username_exists">This username is already taken</string>
+    <string name="error_password_too_short">Password must be at least 6 characters</string>
+    <string name="register_success">Registration successful! You can now login</string>
+    <string name="have_account">Already have an account?</string>
+
+    <!-- Dashboard -->
+    <string name="student_dashboard_title">My Classes</string>
+    <string name="teacher_dashboard_title">Teacher Panel</string>
+    <string name="teacher_dashboard_subtitle">Your classrooms and quick access</string>
+    <string name="no_classrooms">No classrooms yet</string>
+    <string name="no_classrooms_teacher">You haven\'t created any classrooms yet</string>
+    <string name="no_cases_in_classroom">No cases in this classroom yet</string>
+    <string name="classroom_students">%d students</string>
+    <string name="classroom_cases">%d cases</string>
+    <string name="your_classrooms">Your Classrooms</string>
+    <string name="btn_new_class">+ New Class</string>
+    <string name="btn_new_announcement">+ Announcement</string>
+    <string name="cases_title">Cases</string>
+    <string name="content_desc_back">Back</string>
+    <string name="student_dashboard_subtitle">Your enrolled classrooms</string>
+    
+    <!-- Create Classroom -->
+    <string name="create_classroom_title">Create New Classroom</string>
+    <string name="hint_classroom_name">Classroom Name</string>
+    <string name="hint_classroom_description">Description (Optional)</string>
+    <string name="hint_join_code">Join Code (e.g., IC101)</string>
+    <string name="btn_create_classroom">Create Classroom</string>
+    <string name="classroom_created_success">Classroom created successfully!</string>
+    <string name="error_classroom_name_empty">Please enter a classroom name</string>
+    <string name="error_join_code_empty">Please enter a join code</string>
+    <string name="error_join_code_exists">This join code is already in use</string>
+
+    <!-- Join Classroom -->
+    <string name="join_classroom_title">Join Classroom</string>
+    <string name="join_classroom_hint">Enter the join code from your teacher</string>
+    <string name="btn_join_classroom">Join</string>
+    <string name="classroom_joined_success">Successfully joined the classroom!</string>
+    <string name="error_classroom_not_found">Invalid join code</string>
+    <string name="error_already_enrolled">You are already enrolled in this classroom</string>
+    <string name="join_code_label">Join Code:</string>
+
+    <!-- Announcements -->
+    <string name="announcement_title">Post Announcement</string>
+    <string name="hint_announcement_title">Announcement Title</string>
+    <string name="hint_announcement_message">Announcement Message</string>
+    <string name="hint_select_classroom">Select Classroom</string>
+    <string name="btn_post_announcement">Post Announcement</string>
+    <string name="announcement_posted_success">Announcement posted successfully!</string>
+    <string name="error_select_classroom">Please select a classroom</string>
+    <string name="error_announcement_title_empty">Please enter an announcement title</string>
+    <string name="error_announcement_message_empty">Please enter an announcement message</string>
+    <string name="no_announcements">No announcements yet</string>
+    <string name="recent_announcements">Recent Announcements</string>
+
+    <!-- Case Simulation -->
+    <string name="patient_info_title">Patient Information</string>
+    <string name="vital_signs_title">Vital Signs</string>
+    <string name="action_panel_title">Actions</string>
+    <string name="simulation_log_title">Action History</string>
+    
+    <!-- Action Buttons -->
+    <string name="action_request_test">Request Test</string>
+    <string name="action_examine">Examine</string>
+    <string name="action_diagnose">Diagnose</string>
+    <string name="action_prescribe">Prescribe</string>
+    
+    <!-- Vital Signs -->
+    <string name="vital_temperature">Temperature</string>
+    <string name="vital_pulse">Pulse</string>
+    <string name="vital_blood_pressure">Blood Pressure</string>
+    <string name="vital_respiratory">Respiratory Rate</string>
+    
+    <!-- Diagnosis and Grading -->
+    <string name="submit_diagnosis_title">Submit Diagnosis</string>
+    <string name="hint_diagnosis">Your Diagnosis</string>
+    <string name="hint_diagnosis_explanation">Diagnosis explanation and reasoning</string>
+    <string name="btn_submit_diagnosis">Submit Diagnosis</string>
+    <string name="diagnosis_submitted_success">Your diagnosis has been submitted!</string>
+    <string name="error_diagnosis_empty">Please enter a diagnosis</string>
+    <string name="error_explanation_empty">Please enter a diagnosis explanation</string>
+    <string name="correct_diagnosis_label">Correct Diagnosis:</string>
+    <string name="your_diagnosis_label">Your Diagnosis:</string>
+    <string name="diagnosis_explanation_label">Explanation:</string>
+    <string name="score_label">Score:</string>
+    <string name="teacher_feedback_label">Teacher Feedback:</string>
+    <string name="not_graded_yet">Not graded yet</string>
+    <string name="grade_diagnosis_title">Grade Diagnosis</string>
+    <string name="hint_score">Score (0-100)</string>
+    <string name="hint_teacher_feedback">Feedback (optional)</string>
+    <string name="btn_mark_correct">Mark Correct</string>
+    <string name="btn_mark_incorrect">Mark Incorrect</string>
+    <string name="btn_save_grade">Save Grade</string>
+    <string name="diagnosis_graded_success">Diagnosis graded successfully!</string>
+    <string name="student_diagnoses_title">Student Diagnoses</string>
+    <string name="ungraded_diagnoses_title">Ungraded Diagnoses</string>
+    <string name="no_diagnoses">No diagnoses yet</string>
+    <string name="view_diagnoses">View Diagnoses</string>
+
+    <!-- General -->
+    <string name="btn_logout">Logout</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="loading">Loading…</string>
+    <string name="btn_close">Close</string>
+    <string name="error_score_empty">Please enter a score</string>
+    <string name="error_score_invalid">Score must be between 0-100</string>
+    <string name="error_create_classroom_first">Please create a classroom first</string>
+</resources>

@@ -26,7 +26,7 @@
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_revert"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Geri"
+            android:contentDescription="@string/content_desc_back"
             android:layout_marginEnd="@dimen/spacing_m" />
 
         <TextView
@@ -101,7 +101,7 @@
         android:id="@+id/tvCasesTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Vakalar"
+        android:text="@string/cases_title"
         style="@style/TextStyle.Subtitle"
         android:padding="@dimen/spacing_m"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,7 +127,7 @@
         android:id="@+id/tvEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bu sınıfta henüz vaka bulunmuyor"
+        android:text="@string/no_cases_in_classroom"
         style="@style/TextStyle.Caption"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
