@@ -28,10 +28,19 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                // Veritabanında kullanıcı var mı kontrol et
-                val userCount = userDao.getUserCount()
+                // Veritabanının hazır olup olmadığını birkaç kez kontrol et
+                var retryCount = 0
+                var userCount = 0
+
+                while (retryCount < 3) {
+                    userCount = userDao.getUserCount()
+                    if (userCount > 0) break
+                    kotlinx.coroutines.delay(1000)
+                    retryCount++
+                }
+
                 if (userCount == 0) {
-                    _loginState.postValue(LoginState.Error("Demo veriler yükleniyor. Lütfen 2-3 saniye bekleyip tekrar deneyin."))
+                    _loginState.postValue(LoginState.Error("Veritabanı yükleniyor. Lütfen 2-3 saniye bekleyip tekrar deneyin."))
                     _isLoading.postValue(false)
                     return@launch
                 }
@@ -40,7 +49,13 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 if (user != null) {
                     _loginState.postValue(LoginState.Success(user))
                 } else {
-                    _loginState.postValue(LoginState.Error("Geçersiz kullanıcı adı veya şifre"))
+                    // Kullanıcı bulunamadı - detaylı hata mesajı
+                    val existingUser = userDao.getUserByUsername(username)
+                    if (existingUser != null) {
+                        _loginState.postValue(LoginState.Error("Şifre hatalı. Lütfen tekrar deneyin."))
+                    } else {
+                        _loginState.postValue(LoginState.Error("Kullanıcı bulunamadı. Demo hesaplar: ogretmen/123456 veya ogrenci/123456"))
+                    }
                 }
             } catch (e: Exception) {
                 _loginState.postValue(LoginState.Error("Giriş yapılırken hata oluştu: ${e.message}"))

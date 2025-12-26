@@ -25,6 +25,10 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
     val logs: LiveData<List<SimulationLog>>
         get() = _logs ?: MutableLiveData(emptyList())
     
+    private var _existingDiagnosis: LiveData<com.example.eee339_android_proje.data.entity.StudentDiagnosis?>? = null
+    val existingDiagnosis: LiveData<com.example.eee339_android_proje.data.entity.StudentDiagnosis?>
+        get() = _existingDiagnosis ?: MutableLiveData(null)
+
     private val _vitalSigns = MutableLiveData<VitalSigns>()
     val vitalSigns: LiveData<VitalSigns> = _vitalSigns
     
@@ -39,6 +43,7 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
         this.studentId = studentId
         _case = caseScenarioDao.getCaseByIdLive(caseId)
         _logs = simulationLogDao.getLogsByCase(caseId, studentId)
+        _existingDiagnosis = studentDiagnosisDao.getDiagnosisByStudentAndCaseLive(caseId, studentId)
     }
     
     fun parseVitalSigns(vitalSignsJson: String) {
@@ -95,20 +100,41 @@ class CaseSimulationViewModel(application: Application) : AndroidViewModel(appli
     fun submitDiagnosis(caseId: Long, studentId: Long, diagnosis: String, explanation: String) {
         viewModelScope.launch {
             try {
-                val studentDiagnosis = com.example.eee339_android_proje.data.entity.StudentDiagnosis(
-                    caseId = caseId,
-                    studentId = studentId,
-                    diagnosis = diagnosis,
-                    explanation = explanation
-                )
+                // Önce bu öğrencinin bu vakaya daha önce tanı koyup koymadığını kontrol et
+                val existingDiagnosis = studentDiagnosisDao.getDiagnosisByStudentAndCase(caseId, studentId)
 
-                val diagnosisId = studentDiagnosisDao.insert(studentDiagnosis)
-                if (diagnosisId > 0) {
-                    // Log kaydı da oluştur
-                    performAction("Tanı Koy: $diagnosis")
-                    _diagnosisSubmitState.postValue(DiagnosisSubmitState.Success("Tanınız başarıyla gönderildi!"))
+                if (existingDiagnosis != null) {
+                    // Varolan tanıyı güncelle
+                    val updatedDiagnosis = existingDiagnosis.copy(
+                        diagnosis = diagnosis,
+                        explanation = explanation,
+                        submittedAt = System.currentTimeMillis(),
+                        // Yeniden gönderildiği için puanı sıfırla
+                        isCorrect = null,
+                        score = null,
+                        teacherFeedback = null,
+                        gradedByTeacherId = null,
+                        gradedAt = null
+                    )
+                    studentDiagnosisDao.update(updatedDiagnosis)
+                    performAction("Tanı Güncelle: $diagnosis")
+                    _diagnosisSubmitState.postValue(DiagnosisSubmitState.Success("Tanınız başarıyla güncellendi!"))
                 } else {
-                    _diagnosisSubmitState.postValue(DiagnosisSubmitState.Error("Tanı gönderilirken hata oluştu"))
+                    // Yeni tanı ekle
+                    val studentDiagnosis = com.example.eee339_android_proje.data.entity.StudentDiagnosis(
+                        caseId = caseId,
+                        studentId = studentId,
+                        diagnosis = diagnosis,
+                        explanation = explanation
+                    )
+
+                    val diagnosisId = studentDiagnosisDao.insert(studentDiagnosis)
+                    if (diagnosisId > 0) {
+                        performAction("Tanı Koy: $diagnosis")
+                        _diagnosisSubmitState.postValue(DiagnosisSubmitState.Success("Tanınız başarıyla gönderildi!"))
+                    } else {
+                        _diagnosisSubmitState.postValue(DiagnosisSubmitState.Error("Tanı gönderilirken hata oluştu"))
+                    }
                 }
             } catch (e: Exception) {
                 _diagnosisSubmitState.postValue(DiagnosisSubmitState.Error("Hata: ${e.message}"))

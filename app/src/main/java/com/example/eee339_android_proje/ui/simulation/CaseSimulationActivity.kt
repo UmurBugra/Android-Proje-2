@@ -26,6 +26,9 @@ class CaseSimulationActivity : AppCompatActivity() {
     private var userId: Long = 0
     private var isTeacher: Boolean = false
 
+    // Dialog referansını tut
+    private var diagnosisDialog: AlertDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -114,23 +117,45 @@ class CaseSimulationActivity : AppCompatActivity() {
                 }
             }
         }
+
+        // Öğrencinin daha önce koyduğu tanıyı kontrol et
+        viewModel.existingDiagnosis.observe(this) { existingDiagnosis ->
+            // Bu bilgiyi tanı koyma dialogunda gösterebiliriz
+        }
     }
 
     private fun showSubmitDiagnosisDialog() {
         val dialogBinding = DialogSubmitDiagnosisBinding.inflate(LayoutInflater.from(this))
 
-        // Doğru tanıyı göster (isteğe bağlı - debug için)
-        viewModel.caseScenario.value?.let { case ->
-            dialogBinding.tvCorrectDiagnosis.visibility = View.VISIBLE
-            dialogBinding.tvCorrectDiagnosis.text = "Not: Doğru tanı - ${case.correctDiagnosis}"
+        // Öğrencinin önceki tanısını göster
+        viewModel.existingDiagnosis.value?.let { existingDiagnosis ->
+            dialogBinding.etDiagnosis.setText(existingDiagnosis.diagnosis)
+            dialogBinding.etExplanation.setText(existingDiagnosis.explanation)
+
+            // Puanlanmış mı kontrol et
+            if (existingDiagnosis.score != null) {
+                dialogBinding.tvCorrectDiagnosis.visibility = View.VISIBLE
+                dialogBinding.tvCorrectDiagnosis.text = "⚠️ Bu tanı daha önce puanlandı (${existingDiagnosis.score}/100). Yeniden gönderirseniz puan sıfırlanacak."
+            }
         }
 
-        val dialog = AlertDialog.Builder(this)
+        // Doğru tanıyı göster (isteğe bağlı - debug için)
+        if (viewModel.existingDiagnosis.value == null) {
+            viewModel.caseScenario.value?.let { case ->
+                dialogBinding.tvCorrectDiagnosis.visibility = View.VISIBLE
+                dialogBinding.tvCorrectDiagnosis.text = "Not: Doğru tanı - ${case.correctDiagnosis}"
+            }
+        }
+
+        // Önceki dialog varsa kapat
+        diagnosisDialog?.dismiss()
+
+        diagnosisDialog = AlertDialog.Builder(this)
             .setView(dialogBinding.root)
             .create()
 
         dialogBinding.btnCancel.setOnClickListener {
-            dialog.dismiss()
+            diagnosisDialog?.dismiss()
         }
 
         dialogBinding.btnSubmit.setOnClickListener {
@@ -148,10 +173,17 @@ class CaseSimulationActivity : AppCompatActivity() {
             }
 
             viewModel.submitDiagnosis(caseId, userId, diagnosis, explanation)
-            dialog.dismiss()
+            diagnosisDialog?.dismiss()
         }
 
-        dialog.show()
+        diagnosisDialog?.show()
+    }
+
+    override fun onDestroy() {
+        // Dialog'u kapat (memory leak önleme)
+        diagnosisDialog?.dismiss()
+        diagnosisDialog = null
+        super.onDestroy()
     }
 
     companion object {

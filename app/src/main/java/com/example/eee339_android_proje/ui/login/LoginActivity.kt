@@ -44,29 +44,29 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val db = AppDatabase.getDatabase(applicationContext)
                 // Veritabanının açılması ve demo verilerin yüklenmesi için bekleme
-                kotlinx.coroutines.delay(1500)
+                kotlinx.coroutines.delay(2000)
 
-                val userCount = db.userDao().getUserCount()
-                val classroomCount = db.classroomDao().getClassroomById(1)
+                var retryCount = 0
+                while (retryCount < 5) {
+                    val userCount = db.userDao().getUserCount()
+                    if (userCount > 0) {
+                        // Veriler yüklendi
+                        binding.tvError.visibility = View.GONE
+                        break
+                    }
+                    retryCount++
+                    kotlinx.coroutines.delay(500)
+                }
 
-                if (userCount == 0) {
-                    // Veritabanı boş - kullanıcıyı bilgilendir
-                    binding.tvError.text = "Demo veriler yükleniyor... Lütfen 2-3 saniye bekleyip tekrar deneyin."
+                if (retryCount >= 5) {
+                    binding.tvError.text = "Veritabanı yükleniyor... Lütfen uygulamayı yeniden başlatın."
                     binding.tvError.visibility = View.VISIBLE
-                    binding.tvError.setTextColor(getColor(android.R.color.holo_orange_dark))
-                } else if (classroomCount == null) {
-                    // Kullanıcılar var ama sınıflar henüz yüklenmemiş
-                    binding.tvError.text = "Demo veriler yükleniyor... Lütfen bekleyin."
-                    binding.tvError.visibility = View.VISIBLE
-                    binding.tvError.setTextColor(getColor(android.R.color.holo_orange_dark))
-                } else {
-                    // Veriler yüklendi, mesajı temizle
-                    binding.tvError.visibility = View.GONE
+                    binding.tvError.setTextColor(getColor(android.R.color.holo_red_dark))
                 }
             } catch (e: Exception) {
-                binding.tvError.text = "Veritabanı hazırlanıyor, lütfen bekleyin..."
+                binding.tvError.text = "Veritabanı hatası: ${e.message}"
                 binding.tvError.visibility = View.VISIBLE
-                binding.tvError.setTextColor(getColor(android.R.color.holo_orange_dark))
+                binding.tvError.setTextColor(getColor(android.R.color.holo_red_dark))
             }
         }
     }

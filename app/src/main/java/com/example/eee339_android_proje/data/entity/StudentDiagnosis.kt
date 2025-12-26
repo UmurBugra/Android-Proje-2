@@ -33,7 +33,8 @@ import androidx.room.PrimaryKey
     indices = [
         Index(value = ["caseId"]),
         Index(value = ["studentId"]),
-        Index(value = ["gradedByTeacherId"])
+        Index(value = ["gradedByTeacherId"]),
+        Index(value = ["caseId", "studentId"], unique = true)
     ]
 )
 data class StudentDiagnosis(
